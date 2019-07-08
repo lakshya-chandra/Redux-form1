@@ -2,8 +2,6 @@ import React from 'react'
 import { Field, reduxForm} from 'redux-form'
 
 import RenderField from './RenderField'
-
-
 const required = value => (value || typeof value === 'number' ? undefined : 'Required')
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
@@ -29,93 +27,85 @@ const aol = value =>
     ? 'Really? You still use AOL for your email?'
     : undefined
 class ContactForm extends React.Component {
-
   constructor(props){
     super(props);
     this.save = this.save.bind(this);
   }
   save(values) {
     console.log('values =', values);
-
-
     this.props.submitForm(values);
   }
-
-  
   render() {
-    console.log(" ---- " , this.props.items );
-    
     return (
-      <form onSubmit={this.props.handleSubmit(this.save)}>
+      <form onSubmit = {this.props.handleSubmit(this.save)}>
         <div>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor = "firstName">First Name</label>
           <Field
-            name="firstName"
-            component={RenderField}
-            type="text"
-            validate={[required, maxLength15, minLength2]}
+            name = "firstName"
+            component = {RenderField}
+            type = "text"
+            validate = {[required, maxLength15, minLength2]}
           />
         </div>
         <div>
-          <label htmlFor="Age">Age</label>
+          <label htmlFor = "Age">Age</label>
           <Field 
-          name="Age" 
-          component={RenderField} 
-          type="number"
-          validate={[required, number, minValue13]}
-          warn={tooYoung}
+          name = "Age" 
+          component = {RenderField} 
+          type = "number"
+          validate = {[required, number, minValue13]}
+          warn = {tooYoung}
           />
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor = "email">Email</label>
           <Field 
-          name="email" 
-          component={RenderField}
-          type="text" 
-          validate={email}
-          warn={aol}
+          name = "email" 
+          component = {RenderField}
+          type = "email" 
+          validate = {email}
+          warn = {aol}
         />
           <div>
         <label>Gender</label>
         <div>
           <label>
             <Field
-              name="gender"
-              component="input"
-              type="radio"
-              value="male"
-            />{' '}
+              name = "gender"
+              component = "input"
+              type = "radio"
+              value = "male"
+            />
             Male
           </label>
           <label>
             <Field
-              name="gender"
-              component="input"
-              type="radio"
-              value="female"
-            />{' '}
+              name = "gender"
+              component = "input"
+              type = "radio"
+              value = "female"
+            />
             Female
           </label>
         </div>
         <div>
-        <div>
-        <label>City</label>
+          <div>
+           <label>City</label>
+          </div>
+            <Field name = "City" component = "select">
+              <option value = "Select">Select City</option>
+              <option value = "Lucknow">Lucknow</option>
+              <option value = "Pune">Pune</option>
+              <option value = "Goa">Goa</option>
+            </Field>
+          </div>
+          </div>
         </div>
-        <Field name="City" component="select">
-            <option />
-            <option value="Lucknow">Lucknow</option>
-            <option value="Pune">Pune</option>
-            <option value="Goa">Goa</option>
-          </Field>
-        </div>
-        </div>
-        </div>
-        <button type="submit">Submit</button>
+        <button type = "submit" >Submit</button>
       </form>
     );
   }
 }
-
 export default reduxForm({
-  form:'form',
+  form: 'form',
 })(ContactForm)

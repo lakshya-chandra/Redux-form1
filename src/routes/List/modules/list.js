@@ -4,8 +4,6 @@ import { browserHistory } from 'react-router';
 // ------------------------------------
 export const GET_DATA = 'GET_DATA';
 export const SET_USERS_DATA = 'SET_USERS_DATA';
-
-
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -15,19 +13,15 @@ export const setUsersData = (data) => {
     users : data
   }
 }
-
 export const getData = () => {
   return (dispatch) => {
     const usersData = JSON.parse(localStorage.getItem('key'));
-    console.log(' usersData  form Reducer ', usersData);
     dispatch(setUsersData(usersData));
   }
 } 
-
 // ------------------------------------
 // Actions creator
 // ------------------------------------
-
 export const ACTION_HANDLERS = {
   [SET_USERS_DATA]:(state, action) => {
     return {
@@ -36,13 +30,9 @@ export const ACTION_HANDLERS = {
     }
   }
 }
-
-
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-
-
 
 
 // ------------------------------------
@@ -55,6 +45,5 @@ const initialState = {
 
 export default function listReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
-
   return handler ? handler(state, action) : state
 }

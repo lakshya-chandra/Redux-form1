@@ -1,46 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
-
 class Userlist extends React.Component{
    constructor(props){
      super(props);
      this.state = {
-      users : []
+       users : []
      }
-     
-   }
-   
-  componentWillMount(){
-    this.props.getData()
-
   }
-
-  componentDidMount(){
-    this.setState({
-      users : this.props.users
+    componentWillMount(){
+      this.props.getData()
+    }
+    componentDidMount(){
+      this.setState({
+        users : this.props.users
     })
   }
-
    render(){
-    const element = this.state.users.map(item => {
-      return (
-        <div key={item.firstName}>
-          <ol>
-          <li>{item.firstName}</li>
-          <li>{item.Age}</li>
-          <li>{item.email}</li>
-          </ol>
+     const element = this.state.users.map(item => {
+       return (     
+        <div className = "container">
+          <table className = "table table-dark" key ="item.id">
+            <tbody>
+              <tr>
+                <td>{item.firstName}</td>
+                <td>{item.Age}</td>
+                <td>{item.email}</td>
+                <td>{item.gender}</td>
+                <td>{item.City}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      )
-    })
-    return(
-       <div>
-        {element}
-       </div>
+    )
+})
+  return(
+    <span>
+      {element}
+    </span>
+
      )
- 
   }
 }
 
